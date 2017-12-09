@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\IniciarScript.cs">
+    <Files>
+      <File FileName="Assets\Scripts\FlappyBirdScript.cs" Line="41" Column="42" />
+      <File FileName="Assets\Scripts\CanoScript.cs" Line="18" Column="38" />
+      <File FileName="Assets\Scripts\PrincipalScript.cs" Line="6" Column="10" />
+      <File FileName="Assets\Scripts\UIScript.cs" Line="8" Column="19" />
+      <File FileName="Assets\Scripts\IniciarScript.cs" Line="9" Column="40" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
