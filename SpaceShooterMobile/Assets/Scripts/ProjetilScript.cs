@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjetilScript : MonoBehaviour {
 	public float velocidade;
 	public float tempoDeVida;
+	public GameObject fxExplosao;
 
 	// Use this for initialization
 	void Start () {
@@ -21,8 +22,11 @@ public class ProjetilScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D c) {
 		// Destroi o projetil por colisao
 		if (c.gameObject.tag == "Inimigo") {
+			GameObject ex = Instantiate (fxExplosao, transform.position, transform.rotation);
+
 			Destroy (c.gameObject);
 			Destroy (gameObject);
+			Destroy (ex, 0.5f);
 		}
 	}
 }

@@ -6,6 +6,7 @@ public class JogadorScript : MonoBehaviour {
 	public float velocidade;
 	public float limiteEsquerdo, limiteDireito;
 	public int vida;
+	public GameObject fxExplosao;
 
 	// Use this for initialization
 	void Start () {}
@@ -32,9 +33,16 @@ public class JogadorScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D c) {
 		if (c.gameObject.tag == "Inimigo") {
+			GameObject ex = Instantiate (fxExplosao, c.transform.position, c.transform.rotation);
+			Destroy (ex, 0.5f);
 			vida--;
 			Destroy (c.gameObject);
-			if (vida <= 0)  Destroy (gameObject);
+			if (vida <= 0) {
+				GameObject ex2 = Instantiate (fxExplosao, transform.position, transform.rotation);
+				Destroy (ex2, 0.5f);
+				Destroy (gameObject);
+			}
+				
 		}
 	}
 }
