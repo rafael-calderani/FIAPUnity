@@ -24,6 +24,13 @@ public class ProjetilScript : MonoBehaviour {
 		if (c.gameObject.tag == "Inimigo") {
 			GameObject ex = Instantiate (fxExplosao, transform.position, transform.rotation);
 
+            SpaceShooterScript.score++;
+
+            if (SpaceShooterScript.score >= SpaceShooterScript.scoreLife) {
+                SpaceShooterScript.vida++;
+                SpaceShooterScript.scoreLife = SpaceShooterScript.scoreLife * 2;
+            }
+
 			Destroy (c.gameObject);
 			Destroy (gameObject);
 			Destroy (ex, 0.5f);

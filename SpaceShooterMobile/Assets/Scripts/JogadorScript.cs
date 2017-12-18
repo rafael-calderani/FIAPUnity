@@ -1,21 +1,19 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JogadorScript : MonoBehaviour {
 	public float velocidade;
 	public float limiteEsquerdo, limiteDireito;
-	public int vida;
-	public GameObject fxExplosao;
+    public GameObject fxExplosao;
 
 	// Use this for initialization
-	void Start () {}
+	void Start () {
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		Mover ();
-
-		print (vida);
 	}
 
 	void Mover() {
@@ -35,14 +33,28 @@ public class JogadorScript : MonoBehaviour {
 		if (c.gameObject.tag == "Inimigo") {
 			GameObject ex = Instantiate (fxExplosao, c.transform.position, c.transform.rotation);
 			Destroy (ex, 0.5f);
-			vida--;
-			Destroy (c.gameObject);
-			if (vida <= 0) {
+            SpaceShooterScript.vida--;
+            SpaceShooterScript.score++;
+
+			Destroy(c.gameObject);
+			if (SpaceShooterScript.vida <= 0) {
 				GameObject ex2 = Instantiate (fxExplosao, transform.position, transform.rotation);
 				Destroy (ex2, 0.5f);
 				Destroy (gameObject);
-			}
-				
+
+                StartCoroutine("GameRestart", 1.0f);
+            }	
 		}
 	}
+
+    private bool isRestarting = false;
+
+    IEnumerator GameRestart(float waitTime) {
+        if (isRestarting) yield break;
+
+        isRestarting = true;
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene("Start");
+        isRestarting = false;
+    }
 }
