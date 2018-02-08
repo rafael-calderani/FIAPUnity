@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour {
     // Variáveis globais
     public float velocidade, impulso;
     public Transform chaoVerificador;
+    public static bool playerFlippedOnX;
 
     // variáveis internas
     SpriteRenderer spriteRenderer;
@@ -44,6 +45,7 @@ public class PlayerScript : MonoBehaviour {
         if (mover_x != 0) {
             spriteRenderer.flipX = mover_x < 0;
         }
+        playerFlippedOnX = spriteRenderer.flipX;
 
         // Reproduz animação de movimento do personagem
         animator.SetFloat("pRun", Mathf.Abs(input));
