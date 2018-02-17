@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BallScript : MonoBehaviour {
     // Movement Speed
@@ -28,6 +30,28 @@ public class BallScript : MonoBehaviour {
             // Set Velocity with dir * speed
             GetComponent<Rigidbody2D>().velocity = dir * ballSpeed;
         }
+        else if (c.gameObject.tag == "block") {
+            GameStartScript.score++;
+            //TODO: update canvas
+        }
+        else if (c.gameObject.tag == "floor") {
+            GameStartScript.life--;
+            if (GameStartScript.life > 0) {
+                c.gameObject.GetComponent<AudioSource>().Play();
+                Transform ballTransform = GetComponent<Transform>();
+                ballSpeed = 0.0f;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                Text touchMessage = GameObject.Find("TouchMessage").GetComponent<Text>();
+                touchMessage.color = new Color(touchMessage.color.r, touchMessage.color.g, touchMessage.color.b, 255);
+                ballTransform.position = new Vector3(0.0f, -4.0f);
+            }
+            else {
+                // todo: fade effect
+                SceneManager.LoadScene("EndGame");
+            }
+        }
+        GameStartScript.UpdateCanvas();
+        GetComponent<AudioSource>().Play();
     }
     float hitFactor(Vector2 ballPos, Vector2 racketPos, float racketWidth) {
         // ascii art:

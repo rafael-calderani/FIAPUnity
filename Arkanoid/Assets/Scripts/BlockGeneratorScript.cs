@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BlockGeneratorScript : MonoBehaviour {
-    public GameObject blockBlue;
-    public GameObject blockRed;
-    public GameObject blockGreen;
-    public GameObject blockPink;
-    public GameObject blockYellow;
     public GameObject blockDefault;
     public float posicaoY = 4.0f;
     public float posicaoX = -3.0f;
@@ -15,15 +10,17 @@ public class BlockGeneratorScript : MonoBehaviour {
     // Use this for initialization
     IEnumerator Start() {
 
+        SpriteRenderer sr = blockDefault.GetComponent<SpriteRenderer>();
+        if (posicaoY == 4.0f) { sr.color = Color.blue; }
+
         if (posicaoX >= 3.0f) { // Trocar o bloco, reseta posição X e redefine posição Y
             posicaoX = -3.0f;
             posicaoY = posicaoY - 0.3f;
 
             // Trocar bloco de acordo com a posição Y
-            if (posicaoY == 3.7f) { blockDefault = blockRed; }
-            else if (posicaoY == 3.4f) { blockDefault = blockGreen; }
-            else if (posicaoY == 3.1f) { blockDefault = blockPink; }
-            else { blockDefault = blockYellow; }
+            if (posicaoY == 3.7f) { sr.color = Color.red; }
+            else if (posicaoY == 3.4f) { sr.color = Color.green; }
+            else { sr.color = Color.magenta; }
         }
 
         // Define vetor e posição X para instanciar os blocos
