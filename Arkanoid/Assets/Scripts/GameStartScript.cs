@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class GameStartScript : MonoBehaviour {
     public static int life;
-    public static int score;
+	public static int score;
+	public static int bestScore;
     public static float alpha = 0.0f;
 
     // Use this for initialization
@@ -32,8 +33,8 @@ public class GameStartScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)
-            || Input.touchCount > 0) {
+        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)
+			|| Input.touchCount > 0) && (alpha >= 1.0f)) {
             Color textColor = GameObject.Find("TouchMessage").GetComponent<Text>().color;
             if (textColor.a > 0.9f) {
                 BallScript.ballSpeed = 6.4f;
@@ -55,5 +56,6 @@ public class GameStartScript : MonoBehaviour {
         GameObject.Find("Lives").GetComponent<Text>().text = string.Format("Lives: {0}", life);
         GameObject.Find("Score").GetComponent<Text>().text = string.Format("Score: {0}", score);
 
+		if (score > bestScore) bestScore = score;
     }
 }
