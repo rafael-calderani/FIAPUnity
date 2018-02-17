@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bloco
   - Fire
+  - Inimigo
   layers:
   - Default
   - TransparentFX

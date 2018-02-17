@@ -10,6 +10,7 @@ public class BallScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {}
+
     private void Update() {
         if (GetComponent<Rigidbody2D>().velocity == Vector2.zero) {
             GetComponent<Rigidbody2D>().velocity = Vector2.down * ballSpeed;
@@ -53,6 +54,7 @@ public class BallScript : MonoBehaviour {
         GameStartScript.UpdateCanvas();
         GetComponent<AudioSource>().Play();
     }
+
     float hitFactor(Vector2 ballPos, Vector2 racketPos, float racketWidth) {
         // ascii art:
         //

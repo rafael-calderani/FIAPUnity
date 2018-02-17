@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour {
     public GameObject projetil;
+	//public GameObject sensorRotacao;
 
-    SpriteRenderer spriteRenderer;
     // Use this for initialization
-    void Start () {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+    void Start () { }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,5 +23,14 @@ public class GunScript : MonoBehaviour {
             position.x += (PlayerScript.playerFlippedOnX) ? -0.2f : 0.2f;
             Instantiate(projetil, position, transform.rotation);
         }
+
+
+		/*
+		if (Input.GetAxisRaw ("Horizontal") > 0.0f) {
+			sensorRotacao.transform.eulerAngles = new Vector3 (0f, 0f, 0f);
+		} else if (Input.GetAxisRaw ("Horizontal") < 0.0f) {
+			sensorRotacao.transform.eulerAngles = new Vector3 (0f, 180f, 0f);
+		}
+		*/
     }
 }

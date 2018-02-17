@@ -6,7 +6,8 @@ public class PlayerScript : MonoBehaviour {
 
     // Variáveis globais
     public float velocidade, impulso;
-    public Transform chaoVerificador;
+	public Transform sensorEsquerda;
+	public Transform sensorDireita;
     public static bool playerFlippedOnX;
 
     // variáveis internas
@@ -27,8 +28,10 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
 
         // Verificar colisão com o piso
-        estaNoChao = Physics2D.Linecast(transform.position, chaoVerificador.position,
-            1 << LayerMask.NameToLayer("Piso"));
+		estaNoChao = Physics2D.Linecast(transform.position, sensorEsquerda.position,
+            1 << LayerMask.NameToLayer("Piso")) ||
+			Physics2D.Linecast(transform.position, sensorDireita.position,
+				1 << LayerMask.NameToLayer("Piso"));
 
         // Mover
         float input = Input.GetAxisRaw("Horizontal");
@@ -47,10 +50,9 @@ public class PlayerScript : MonoBehaviour {
         }
         playerFlippedOnX = spriteRenderer.flipX;
 
-        // Reproduz animação de movimento do personagem
+        // Seta os parametros de animação de movimento do personagem
         animator.SetFloat("pRun", Mathf.Abs(input));
         animator.SetBool("pJump", !estaNoChao);
         animator.SetBool("pFire", Input.GetButton("Fire1"));
-
     }
 }
