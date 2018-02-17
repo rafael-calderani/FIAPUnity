@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour {
 
     // Variáveis globais
-    public float velocidade, impulso;
+    public float velocidade, impulso, life;
 	public Transform sensorEsquerda;
 	public Transform sensorDireita;
     public static bool playerFlippedOnX;
@@ -54,5 +54,17 @@ public class PlayerScript : MonoBehaviour {
         animator.SetFloat("pRun", Mathf.Abs(input));
         animator.SetBool("pJump", !estaNoChao);
         animator.SetBool("pFire", Input.GetButton("Fire1"));
-    }
+	}
+
+	void OnTriggerEnter2D(Collider2D c) {
+		// Destroi o projetil por colisao
+		if (c.gameObject.tag == "SubInimigo") {
+			life--;
+			Destroy(c.gameObject);
+			if (life <= 0) {
+				Destroy(gameObject);
+				// TODO: GAME OVER
+			}
+		}
+	}
 }

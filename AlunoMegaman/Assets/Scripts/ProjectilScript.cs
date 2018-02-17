@@ -23,13 +23,21 @@ public class ProjectilScript : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D c) {
-        // Destroi o projetil por colisao
+		// Destroi o projetil por colisao
         if (c.gameObject.tag == "Inimigo") {
-            GameObject ex = Instantiate(fxExplosao, transform.position, transform.rotation);
+            //GameObject ex = Instantiate(fxExplosao, transform.position, transform.rotation);
 
             Destroy(c.gameObject);
-            Destroy(gameObject);
-            Destroy(ex, 0.5f);
-        }
+            //Destroy(ex, 0.5f);
+		}
+		Destroy(gameObject);
     }
+
+	void OnTriggerEnter2D(Collider2D c){
+		if (c.gameObject.tag == "SubInimigo") {
+			Destroy(c.gameObject);
+		}
+
+		Destroy(gameObject);
+	}
 }
